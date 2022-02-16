@@ -15,7 +15,7 @@
 
 ```
 
-## Serve
+## Serve + mix watch
 
 ```bash
 
