@@ -22,3 +22,7 @@
 # npm run dev
 
 ```
+
+## Library Avaiable
+
+- Tailwind CSS
