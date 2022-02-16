@@ -15,10 +15,14 @@
 
 ```
 
-## Serve
+## Serve + mix watch
 
 ```bash
 
 # npm run dev
 
 ```
+
+## Library Avaiable
+
+- Tailwind CSS
