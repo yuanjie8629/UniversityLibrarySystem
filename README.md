@@ -19,10 +19,10 @@
 
 ```bash
 
-# npm run dev
+# npm run php
 
 ```
 
 ## Library Avaiable
 
-- Tailwind CSS
+-   Tailwind CSS
