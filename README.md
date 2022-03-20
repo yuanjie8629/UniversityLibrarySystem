@@ -26,3 +26,4 @@
 ## Library Avaiable
 
 -   Tailwind CSS
+-   Vue
