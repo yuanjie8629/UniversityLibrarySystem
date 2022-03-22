@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+@include('./auth.php');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +27,18 @@ Route::get('/register', function () {
     return view('register');
 });
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// get csrf token
+Route::get('/csrf', function () {
+    return response()->json(csrf_token());
+});
+
+// book
+Route::post('book', [App\Http\Controllers\BookController::class, 'create']);
+Route::get('books', [App\Http\Controllers\BookController::class, 'readAll']);
+Route::get('book/{id}', [App\Http\Controllers\BookController::class, 'readOne']);
+Route::put('book/{id}', [App\Http\Controllers\BookController::class, 'update']);
+Route::delete('book/{id}', [App\Http\Controllers\BookController::class, 'delete']);
