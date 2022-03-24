@@ -20,11 +20,11 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    return view('login', ['name' => "IQ9999999", 'age' => [20, 21, 22, 23]]);
+    return view('auth.login', ['name' => "IQ9999999", 'age' => [20, 21, 22, 23]]);
 });
 
 Route::get('/register', function () {
-    return view('register');
+    return view('auth.register');
 });
 
 // Auth::routes();

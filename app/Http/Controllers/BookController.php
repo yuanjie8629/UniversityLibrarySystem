@@ -15,6 +15,10 @@ class BookController extends Controller
     public function readAll(Request $request)
     {
         $books = Book::all();
+        foreach ($books as $book) {
+            // unserilize catogies
+            $book->categories = unserialize($book->categories);
+        }
         return response()->json($books);
     }
 
@@ -23,6 +27,7 @@ class BookController extends Controller
     {
         $book = Book::find($id);
         if ($book) {
+            $book->categories = unserialize($book->categories);
             return response()->json($book);
         } else {
             return response()->json(['message' => 'Book not found'], 404);
