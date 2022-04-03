@@ -38,7 +38,7 @@ class BookController extends Controller
     public function rules()
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
+            'title' => ['required', 'string', 'max:255', 'unique:books'],
             'author' => ['required', 'string', 'max:255'],
             'publisher' => ['required', 'string', 'max:255'],
             'pages' => ['required', 'integer', /* 'min:1' */],
