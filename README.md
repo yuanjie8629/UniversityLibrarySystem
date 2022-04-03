@@ -25,5 +25,5 @@
 
 ## Library Avaiable
 
--   Tailwind CSS
 -   Vue
+-   Vuetify

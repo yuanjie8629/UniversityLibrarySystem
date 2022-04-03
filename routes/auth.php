@@ -4,10 +4,11 @@ use Illuminate\Support\Facades\Route;
 
 // LOGIN
 // need authentication middleware
-Route::get('/login', 'Auth\LoginController@showLoginForm' /* can put class */)->name('login');
+Route::get('/login', 'Auth\LoginController@authenticate' /* can put class */)->name('login');
 
 // REGISTER
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm' /* can put class */)->name('register');
+Route::post('/register', 'Auth\RegisterController@registerUser' /* can put class */)->name('register');
 
 
 // FORGET PASSWORD
