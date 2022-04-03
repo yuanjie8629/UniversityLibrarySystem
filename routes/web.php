@@ -20,11 +20,11 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    return view('login', ['name' => "IQ9999999", 'age' => [20, 21, 22, 23]]);
+    return view('auth.login', ['name' => "IQ9999999", 'age' => [20, 21, 22, 23]]);
 });
 
 Route::get('/register', function () {
-    return view('register');
+    return view('auth.register');
 });
 
 // Auth::routes();
@@ -42,3 +42,11 @@ Route::get('books', [App\Http\Controllers\BookController::class, 'readAll']);
 Route::get('book/{id}', [App\Http\Controllers\BookController::class, 'readOne']);
 Route::put('book/{id}', [App\Http\Controllers\BookController::class, 'update']);
 Route::delete('book/{id}', [App\Http\Controllers\BookController::class, 'delete']);
+
+//borrow
+Route::post('borrow', [App\Http\Controllers\BorrowController::class, 'create']);
+Route::get('borrows', [App\Http\Controllers\BorrowController::class, 'readAll']);
+Route::get('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'readOne']);
+Route::put('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'update']);
+Route::delete('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'delete']);
+
