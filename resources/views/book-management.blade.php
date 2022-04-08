@@ -1,4 +1,4 @@
-@extends('layouts.Navbar')
+@extends('layouts.AdminNavbar')
 
 @section('content')
 <div class="container">
@@ -9,10 +9,7 @@
             </div>
             @endif
             @can('isAdmin')
-            @else
-            <div class="btn btn-info btn-lg">
-                You have Student or Lecturer Access (Home page)
-            </div>
+                <admin-books-table></admin-books-table>
             @endcan
         </div>
 </div>

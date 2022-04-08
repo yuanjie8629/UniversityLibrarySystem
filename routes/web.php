@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\BookController;
+use Illuminate\Support\Facades\Gate;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,9 +38,12 @@ Route::get('/csrf', function () {
     return response()->json(csrf_token());
 });
 
-Route::get('/admin-home', function () {
-    return response()->json(['message' => 'Admin Home']);
-});
+//Admin navigation
+Route::get('/manage-books', [App\Http\Controllers\BookManagementController::class, 'index'])->middleware("can:isAdmin")->name('book-management');
+Route::get('/manage-users', [App\Http\Controllers\UserManagementController::class, 'index'])->middleware("can:isAdmin")->name('user-management');
+
+
+
 
 // book
 Route::post('book', [App\Http\Controllers\BookController::class, 'create']);

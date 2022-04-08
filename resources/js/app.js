@@ -25,6 +25,12 @@ Vue.component(
     require("./components/ExampleComponent.vue").default
 );
 
+//Admin Components
+Vue.component(
+    "admin-books-table",
+    require("./components/admin/BooksTable.vue").default
+);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
