@@ -37,10 +37,12 @@ class RedirectIfAuthenticated
             case 'admin':
                return redirect('/manage-books');
                break;
-            case 'user':
+            case 'student':
                return redirect('/home');
                break; 
-      
+            case 'lecturer':
+               return redirect('/home');
+               break; 
             default:
                return redirect('/home'); 
                break;

@@ -35,10 +35,12 @@ class LoginController extends Controller
           case 'admin':
             return '/manage-books';
             break;
-          case 'user':
+          case 'student':
             return '/home';
             break; 
-      
+            case 'lecturer':
+              return '/home';
+              break; 
           default:
             return '/home'; 
           break;
