@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ValidatedInput;
 use App\Models\Book;
+use Illuminate\Support\Facades\Gate;
 
 class BookController extends Controller
 {
@@ -38,7 +39,7 @@ class BookController extends Controller
     public function rules()
     {
         return [
-            'title' => ['required', 'string', 'max:255', 'unique:books'],
+            'title' => ['required', 'string', 'max:255'],
             'author' => ['required', 'string', 'max:255'],
             'publisher' => ['required', 'string', 'max:255'],
             'pages' => ['required', 'integer', /* 'min:1' */],
@@ -51,10 +52,8 @@ class BookController extends Controller
     // create new book
     public function create(Request $request)
     {
-        // assign status default value
-        $request->merge(['status' => 'AVAILABLE']);
-
-        // validate request
+        if(Gate::allows("isAdmin")) {
+            // validate request
         $validator = Validator::make($request->all(), $this->rules());
         // check if book is already exist
         if ($validator->fails()) {
@@ -84,12 +83,16 @@ class BookController extends Controller
         }
 
         return response()->json($book, 201);
+        } else {
+            dd("You are not an admin.");
+        }
     }
 
     // update a book
     public function update(Request $request, $id)
     {
-        // validate request
+        if(Gate::allows("isAdmin")) {
+            // validate request
         $validator = Validator::make($request->all(), $this->rules());
         // check if book is already exist
         if ($validator->fails()) {
@@ -112,11 +115,15 @@ class BookController extends Controller
         } else {
             return response()->json(['message' => 'Book not found'], 404);
         }
+        } else {
+            dd("You are not an admin.");
+        }
     }
 
     // delete a book
     public function delete($id)
     {
+       if(Gate::allows("isAdmin")) {
         $book = Book::find($id);
         if ($book) {
             $book->delete();
@@ -124,5 +131,8 @@ class BookController extends Controller
         } else {
             return response()->json(['message' => 'Book not found'], 404);
         }
+       } else {
+           dd("You are not an admin.");
+       }
     }
 }
