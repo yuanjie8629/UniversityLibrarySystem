@@ -42,15 +42,9 @@ Route::get('/csrf', function () {
 Route::get('/manage-books', [App\Http\Controllers\BookManagementController::class, 'index'])->middleware("can:isAdmin")->name('book-management');
 Route::get('/manage-users', [App\Http\Controllers\UserManagementController::class, 'index'])->middleware("can:isAdmin")->name('user-management');
 
-
-
-
 // book
 Route::post('book', [App\Http\Controllers\BookController::class, 'create']);
 Route::get('books', [App\Http\Controllers\BookController::class, 'readAll']);
 Route::get('book/{id}', [App\Http\Controllers\BookController::class, 'readOne']);
 Route::put('book/{id}', [App\Http\Controllers\BookController::class, 'update']);
 Route::delete('book/{id}', [App\Http\Controllers\BookController::class, 'delete']);
-
-
-
