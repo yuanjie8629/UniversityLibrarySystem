@@ -18,7 +18,7 @@ class BookController extends Controller
         $books = Book::all();
         foreach ($books as $book) {
             // unserilize catogies
-            $book->categories = unserialize($book->categories);
+            $book->categories = json_decode($book->categories);
         }
         return response()->json($books);
     }
@@ -52,8 +52,11 @@ class BookController extends Controller
     // create new book
     public function create(Request $request)
     {
-        if(Gate::allows("isAdmin")) {
-            // validate request
+
+        // assign status default value
+        $request->merge(['status' => 'AVAILABLE']);
+
+        // validate request
         $validator = Validator::make($request->all(), $this->rules());
         // check if book is already exist
         if ($validator->fails()) {
@@ -72,7 +75,7 @@ class BookController extends Controller
         $book->author = $validated['author'];
         $book->publisher = $validated['publisher'];
         $book->pages = $validated['pages'];
-        $book->categories = serialize($validated['categories']);
+        $book->categories = json_encode($validated['categories']);
         $book->image = $validated['image'];
         $book->status = $validated['status'];
         $book->save();
@@ -83,16 +86,12 @@ class BookController extends Controller
         }
 
         return response()->json($book, 201);
-        } else {
-            dd("You are not an admin.");
-        }
     }
 
     // update a book
     public function update(Request $request, $id)
     {
-        if(Gate::allows("isAdmin")) {
-            // validate request
+        // validate request
         $validator = Validator::make($request->all(), $this->rules());
         // check if book is already exist
         if ($validator->fails()) {
@@ -115,24 +114,21 @@ class BookController extends Controller
         } else {
             return response()->json(['message' => 'Book not found'], 404);
         }
-        } else {
-            dd("You are not an admin.");
-        }
     }
 
     // delete a book
     public function delete($id)
     {
-       if(Gate::allows("isAdmin")) {
-        $book = Book::find($id);
-        if ($book) {
-            $book->delete();
-            return response()->json(['message' => 'Book deleted'], 200);
+        if (Gate::allows("isAdmin")) {
+            $book = Book::find($id);
+            if ($book) {
+                $book->delete();
+                return response()->json(['message' => 'Book deleted'], 200);
+            } else {
+                return response()->json(['message' => 'Book not found'], 404);
+            }
         } else {
-            return response()->json(['message' => 'Book not found'], 404);
+            dd("You are not an admin.");
         }
-       } else {
-           dd("You are not an admin.");
-       }
     }
 }

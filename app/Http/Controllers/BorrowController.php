@@ -12,14 +12,14 @@ use App\Models\Borrow;
 class BorrowController extends Controller
 {
     //retrieve all borrows
-    public function readAllBorrows(Request $request)
+    public function readAll(Request $request)
     {
         $borrows = Borrow::all();
         return response()->json($borrows);
     }
 
     // retrieve one borrow
-    public function readOneBorrow(Request $request, $id)
+    public function readOne(Request $request, $id)
     {
         $borrow = Borrow::find($id);
         if ($borrow) {
@@ -42,7 +42,7 @@ class BorrowController extends Controller
     }
 
     //create new borrow
-    public function createBorrow(Request $request)
+    public function create(Request $request)
     {
         // validate request
         $validator = Validator::make($request->all(), $this->rules());
