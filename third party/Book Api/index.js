@@ -61,7 +61,7 @@ const books = [];
         // create book
         axios({
             method: "post",
-            url: "http://127.0.0.1:8000/book",
+            url: "http://127.0.0.1:8000/api/book",
             data: books[i],
         });
     }
