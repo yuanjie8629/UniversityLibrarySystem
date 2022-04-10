@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Gate;
 |
 */
 
-// all routes should be inside here
+// all routes should be inside here except login
 Route::middleware(['auth'])->group(function () {
     Route::get('/testing', function () {
         return view('testing');
