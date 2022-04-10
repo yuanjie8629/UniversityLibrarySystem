@@ -37,11 +37,3 @@ After finish create database table, run third party to insert data into database
 
 -   Vue
 -   Vuetify
-
-## REST API Available
-
-### Book REST API
-
--   http://127.0.0.1:8000/api/book
--   http://127.0.0.1:8000/api/books
--   http://127.0.0.1:8000/api/book

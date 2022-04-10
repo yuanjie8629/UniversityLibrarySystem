@@ -28,7 +28,7 @@ class BookController extends Controller
     {
         $book = Book::find($id);
         if ($book) {
-            $book->categories = unserialize($book->categories);
+            $book->categories = json_decode($book->categories);
             return response()->json($book);
         } else {
             return response()->json(['message' => 'Book not found'], 404);
@@ -39,7 +39,7 @@ class BookController extends Controller
     public function rules()
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
+            'title' => ['required', 'string', 'max:255', 'unique:books'],
             'author' => ['required', 'string', 'max:255'],
             'publisher' => ['required', 'string', 'max:255'],
             'pages' => ['required', 'integer', /* 'min:1' */],
@@ -57,8 +57,7 @@ class BookController extends Controller
         $request->merge(['status' => 'AVAILABLE']);
 
         // validate request
-        $validator = Validator::make($request->all(), $this->rules());
-        // check if book is already exist
+        $validator = Validator::make($request->only(['title', 'author', 'publisher', 'pages', 'categories', 'image', 'status']), $this->rules());
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
@@ -70,15 +69,11 @@ class BookController extends Controller
             return response()->json(['message' => 'Book already exists'], 400);
         }
 
-        $book = new Book();
-        $book->title = $validated['title'];
-        $book->author = $validated['author'];
-        $book->publisher = $validated['publisher'];
-        $book->pages = $validated['pages'];
-        $book->categories = json_encode($validated['categories']);
-        $book->image = $validated['image'];
-        $book->status = $validated['status'];
-        $book->save();
+        // json categories
+        $validated['categories'] = json_encode($validated['categories']);
+
+        // create new book
+        $book = Book::create($validated);
 
         // return error message if failed
         if (!$book) {
@@ -92,8 +87,7 @@ class BookController extends Controller
     public function update(Request $request, $id)
     {
         // validate request
-        $validator = Validator::make($request->all(), $this->rules());
-        // check if book is already exist
+        $validator = Validator::make($request->only([['title', 'author', 'publisher', 'pages', 'categories', 'image', 'status']]), $this->rules());
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
@@ -101,14 +95,8 @@ class BookController extends Controller
 
         $book = Book::find($id);
         if ($book) {
-            $book->title = $validated['title'];
-            $book->author = $validated['author'];
-            $book->publisher = $validated['publisher'];
-            $book->pages = $validated['pages'];
-            $book->categories = serialize($validated['categories']);
-            $book->image = $validated['image'];
-            $book->status = $validated['status'];
-            $book->save();
+            // update book
+            $book->update($validated);
 
             return response()->json($book, 200);
         } else {

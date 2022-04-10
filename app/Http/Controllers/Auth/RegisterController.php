@@ -3,99 +3,50 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Auth;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+  public function showRegistrationForm()
+  {
+    return view('auth.register');
+  }
 
-    use RegistersUsers;
+  public function rules()
+  {
+    return [
+      'name' => ['required', 'string', 'max:255'],
+      'role' => ['required', Rule::in(['ADMIN', 'STUDENT', 'LECTURER'])],
+      'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+      'telephone' => ['required', 'string', 'min:10', 'max:11'],
+    ];
+  }
 
-     /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    // protected string $redirectTo = RouteServiceProvider::HOME;
-    public function redirectTo() {
-        $role = Auth::user()->role; 
-        switch ($role) {
-          case 'admin':
-            return '/manage-books';
-            break;
-          case 'student':
-            return '/home';
-            break; 
-            case 'lecturer':
-              return '/home';
-              break; 
-          default:
-            return '/home'; 
-          break;
-        }
-      }
-    
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
+  public function register(Request $request)
+  {
+    // validate request
+    $validator = Validator::make($request->only(['name', 'role', 'email', 'telephone']), $this->rules());
+    if ($validator->fails()) {
+      return response()->json(['message' => $validator->errors()->all()], 422);
+    }
+    $validated = $validator->validated();
+
+    // check if user already exists
+    $user = User::where('email', $validated['email'])->first();
+    if ($user) {
+      return response()->json(['message' => 'User already exists'], 400);
     }
 
-     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, 
-        [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8'],
-            "password_confirmation" => ['required', 'string', 'min:8', "same:password"],
-            "role" => ["required", "string"],
-        ],
-        
-        [
-            "password_confirmation.same" => "Confirm password must match with password."
-        ]
-    );
-    }
+    // telephone as password
+    $validated['password'] = Hash::make($validated['telephone']);
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            "role" => $data["role"],
-        ]);
-    }
+    // create new user
+    $user = User::create($validated);
+
+    return response()->json(['message' => 'User created successfully'], 200);
+  }
 }

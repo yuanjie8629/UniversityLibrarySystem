@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string("name");
             $table->enum("role", ["STUDENT", "LECTURER", "ADMIN"]);
             $table->string("email")->unique();
-            $table->integer("telephone");
+            $table->string("telephone");
             $table->string("password");
-            $table->json("metafield");
+            $table->json("metafield")->nullable();
         });
     }
 

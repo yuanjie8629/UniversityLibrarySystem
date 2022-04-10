@@ -24,9 +24,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'telephone',
     ];
-
-    protected string $guard = 'user';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -35,15 +34,15 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function borrow()
+    {
+        return $this->hasOne('App\Models\Borrow');
+    }
+
+    public function borrows()
+    {
+        return $this->hasMany('App\Models\Borrow');
+    }
 }

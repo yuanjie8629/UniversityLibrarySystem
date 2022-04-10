@@ -3,53 +3,57 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\ResponseFactory\Route;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-    use AuthenticatesUsers;
+  public function showLoginForm()
+  {
+    return view('auth.login');
+  }
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    // protected string $redirectTo = RouteServiceProvider::HOME;
-    public function redirectTo() {
-        $role = Auth::user()->role; 
-        switch ($role) {
-          case 'admin':
-            return '/manage-books';
-            break;
-          case 'student':
-            return '/home';
-            break; 
-            case 'lecturer':
-              return '/home';
-              break; 
-          default:
-            return '/home'; 
-          break;
-        }
+  public function rules()
+  {
+    return [
+      'email' => 'required|email',
+      'password' => 'required|min:8'
+    ];
+  }
+
+  public function login(Request $request)
+  {
+    $validator = Validator::make($request->only(['email', 'password']), $this->rules());
+    if ($validator->fails()) {
+      return response()->json(['errors' => $validator->errors()]);
+    }
+    $validated = $validator->validated();
+
+    // check if email and password is correct
+    $user = User::where('email', $validated['email'])->first();
+    if (!$user || !Hash::check($validated['password'], $user->password)) {
+      return response()->json(['errors' => ['email' => ['Invalid credentials']]], 422);
+    }
+
+    // redirect to dashboard
+    if (Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']])) {
+      $user = Auth::user();
+      $role = $user->role;
+      switch ($role) {
+        case 'ADMIN':
+          // return redirect()->route('admin.dashboard');
+          return redirect()->route('testing');
+        case 'STUDENT':
+          return redirect()->route('user.dashboard');
+        case 'LECTURER':
+          return redirect()->route('user.dashboard');
+        default:
+          return redirect()->route('user.dashboard');
       }
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    }
+  }
 }
