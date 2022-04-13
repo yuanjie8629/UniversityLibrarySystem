@@ -10,7 +10,7 @@
             @endif
             @can('isAdmin')
             @else
-            <user-book-list></user-book-list>
+            <change-password-form :user_id={{Auth::id()}}></change-password-form>
             @endcan
         </div>
 </div>

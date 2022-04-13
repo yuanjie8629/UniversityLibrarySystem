@@ -32,7 +32,7 @@
                 <h2>Utar Library</h2>
                 <ul>
                     <li><a href="/home">Home</a></li>
-                    <li><a href="/penalty">Penalty</a></li>
+                    <li><a href="/change-password">Manage Account</a></li>
                 </ul>
             </div>
             <div class="right-view">
@@ -90,6 +90,7 @@
                                                                          document.getElementById('logout-form').submit();">
                                                         {{ __('Logout') }}
                                                     </a>
+                                                   
 
                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                         class="d-none">

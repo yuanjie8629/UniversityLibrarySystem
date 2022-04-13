@@ -52,10 +52,6 @@ class BookController extends Controller
     // create new book
     public function create(Request $request)
     {
-
-        // assign status default value
-        $request->merge(['status' => 'AVAILABLE']);
-
         // validate request
         $validator = Validator::make($request->only(['title', 'author', 'publisher', 'pages', 'categories', 'image', 'status']), $this->rules());
         if ($validator->fails()) {

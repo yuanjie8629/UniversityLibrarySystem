@@ -76,14 +76,6 @@
                                                 required
                                             ></v-select>
                                         </v-col>
-                                        <v-col cols="12">
-                                            <v-checkbox
-                                                v-model="resetPassword"
-                                                value="true"
-                                                label="Reset password"
-                                                type="checkbox"
-                                            ></v-checkbox>
-                                        </v-col>
                                     </v-row>
                                 </v-container>
                             </v-card-text>

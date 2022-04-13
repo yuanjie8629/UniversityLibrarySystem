@@ -38,20 +38,29 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('book/{id}', [App\Http\Controllers\BookController::class, 'delete']);
 
         //borrow
-        Route::post('borrow', [App\Http\Controllers\BorrowController::class, 'create']);
-        Route::get('borrows', [App\Http\Controllers\BorrowController::class, 'readAll']);
-        Route::get('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'readOne']);
-        Route::put('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'update']);
-        Route::delete('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'delete']);
+        // Route::post('borrow', [App\Http\Controllers\BorrowController::class, 'create']);
+        // Route::get('borrows', [App\Http\Controllers\BorrowController::class, 'readAll']);
+        // Route::get('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'readOne']);
+        // Route::put('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'update']);
+        // Route::delete('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'delete']);
 
         Route::get('/manage-books', [App\Http\Controllers\BookManagementController::class, 'index'])->name('book-management');
         Route::get('/manage-users', [App\Http\Controllers\UserManagementController::class, 'index'])->name('user-management');
+        
     });
 
     // public permission
     // user model
     // change password
+    
     Route::post('change-password/{id}', [App\Http\Controllers\Auth\ChangePasswordController::class, 'changePassword'])->name('change-password');
+
+    //borrow
+    Route::post('borrow', [App\Http\Controllers\BorrowController::class, 'create']);
+    Route::get('borrows', [App\Http\Controllers\BorrowController::class, 'readAll']);
+    Route::get('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'readOne']);
+    Route::put('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'update']);
+    Route::delete('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'delete']);
 
     // book model
     Route::get('books', [App\Http\Controllers\BookController::class, 'readAll']);
@@ -74,6 +83,7 @@ Route::post('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 // });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/change-password', [App\Http\Controllers\auth\ChangePasswordController::class, 'index'])->name('change-password');
 
 // get csrf token
 Route::get('/csrf', function () {

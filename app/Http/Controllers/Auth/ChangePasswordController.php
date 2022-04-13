@@ -21,4 +21,11 @@ class ChangePasswordController extends Controller
 
         return response()->json(['message' => 'Password not changed'], 400);
     }
+
+    public function index()
+    {
+    return view('change-password');
+    }
 }
+
+
