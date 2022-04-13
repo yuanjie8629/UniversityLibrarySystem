@@ -84,6 +84,7 @@ Route::post('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/change-password', [App\Http\Controllers\auth\ChangePasswordController::class, 'index'])->name('change-password');
+Route::get('/return-book', [App\Http\Controllers\HomeController::class, 'returnBook'])->name('return-book');
 
 // get csrf token
 Route::get('/csrf', function () {

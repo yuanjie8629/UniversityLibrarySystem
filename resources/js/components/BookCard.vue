@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     props: {
         data: Object,
@@ -70,9 +71,17 @@ export default {
         };
     },
     methods: {
-        pressed() {
-            coonsole.log("Pressed");
-        },
+        // borrowBoook(id) {
+        //     await axios.post("http://127.0.0.1:8000/borrow").then((res) => {
+        //             if (res.status === 201) {
+        //                 Vue.$toast.open({
+        //                     message: "Book Returned.",
+        //                     type: "success",
+        //                     position: "top",
+        //                 });
+        //             }
+        //         })
+        // }
     },
 };
 </script>

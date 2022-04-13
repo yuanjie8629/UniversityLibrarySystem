@@ -30,4 +30,11 @@ class HomeController extends Controller
     {
         return view('change-password');
     }
+
+    public function returnBook()
+    {
+        return view('return-book');
+    }
+
+
 }
