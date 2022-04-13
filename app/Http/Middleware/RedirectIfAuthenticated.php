@@ -34,13 +34,13 @@ class RedirectIfAuthenticated
           $role = Auth::user()->role; 
       
           switch ($role) {
-            case 'admin':
+            case 'ADMIN':
                return redirect('/manage-books');
                break;
-            case 'student':
+            case 'STUDENT':
                return redirect('/home');
                break; 
-            case 'lecturer':
+            case 'LECTURER':
                return redirect('/home');
                break; 
             default:

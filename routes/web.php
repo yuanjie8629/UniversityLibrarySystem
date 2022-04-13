@@ -23,9 +23,13 @@ Route::middleware(['auth'])->group(function () {
 
     // admin permission
     Route::middleware(['can:isAdmin'])->group(function () {
+        
         // user model 
+        Route::get('users', [App\Http\Controllers\UserController::class, 'readAll']);
         Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
         Route::post('register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
+        Route::put('user/{id}', [App\Http\Controllers\UserController::class, 'update']);
+        Route::delete('user/{id}', [App\Http\Controllers\UserController::class, 'delete']);
         Route::post('reset-password/{id}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'resetPassword'])->name('reset-password');
 
         // book model
@@ -39,6 +43,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'readOne']);
         Route::put('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'update']);
         Route::delete('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'delete']);
+
+        Route::get('/manage-books', [App\Http\Controllers\BookManagementController::class, 'index'])->name('book-management');
+        Route::get('/manage-users', [App\Http\Controllers\UserManagementController::class, 'index'])->name('user-management');
     });
 
     // public permission
@@ -53,14 +60,18 @@ Route::middleware(['auth'])->group(function () {
 
 // special case for login function
 Route::middleware(['auth.login'])->group(function () {
-    Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+    Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 });
 
+//Logout
+Route::get('/logout', 'Auth\LoginController@logout' /* can put class */)->name('logout');
+Route::post('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -69,6 +80,6 @@ Route::get('/csrf', function () {
     return response()->json(csrf_token());
 });
 
-//Admin navigation
-Route::get('/manage-books', [App\Http\Controllers\BookManagementController::class, 'index'])->middleware("can:isAdmin")->name('book-management');
-Route::get('/manage-users', [App\Http\Controllers\UserManagementController::class, 'index'])->middleware("can:isAdmin")->name('user-management');
+
+
+

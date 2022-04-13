@@ -39,7 +39,7 @@ class BookController extends Controller
     public function rules()
     {
         return [
-            'title' => ['required', 'string', 'max:255', 'unique:books'],
+            'title' => ['required', 'string', 'max:255'],
             'author' => ['required', 'string', 'max:255'],
             'publisher' => ['required', 'string', 'max:255'],
             'pages' => ['required', 'integer', /* 'min:1' */],
@@ -87,7 +87,7 @@ class BookController extends Controller
     public function update(Request $request, $id)
     {
         // validate request
-        $validator = Validator::make($request->only([['title', 'author', 'publisher', 'pages', 'categories', 'image', 'status']]), $this->rules());
+        $validator = Validator::make($request->only(['title', 'author', 'publisher', 'pages', 'categories', 'image', 'status']), $this->rules());
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }

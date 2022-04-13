@@ -12,6 +12,7 @@ use Illuminate\Routing\ResponseFactory\Route;
 
 class LoginController extends Controller
 {
+
   public function showLoginForm()
   {
     return view('auth.login');
@@ -45,15 +46,20 @@ class LoginController extends Controller
       $role = $user->role;
       switch ($role) {
         case 'ADMIN':
-          // return redirect()->route('admin.dashboard');
-          return redirect()->route('testing');
+          return redirect('/manage-books');
+          // return redirect()->route('testing');
         case 'STUDENT':
-          return redirect()->route('user.dashboard');
+          return redirect('/home');
         case 'LECTURER':
-          return redirect()->route('user.dashboard');
+          return redirect('/home');
         default:
-          return redirect()->route('user.dashboard');
+          return redirect('/home');
       }
     }
+  }
+  
+  public function logout(Request $request) {
+    Auth::logout();
+    return redirect('/');
   }
 }

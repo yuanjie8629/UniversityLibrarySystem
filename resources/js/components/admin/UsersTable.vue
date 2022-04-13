@@ -2,14 +2,14 @@
     <v-app>
         <v-data-table
             :headers="headers"
-            :items="books"
+            :items="users"
             :search="search"
-            sort-by="title"
+            sort-by="name"
             class="elevation-1"
         >
             <template v-slot:top>
                 <v-toolbar flat>
-                    <v-toolbar-title>Books</v-toolbar-title>
+                    <v-toolbar-title>Users</v-toolbar-title>
                     <v-text-field
                         v-model="search"
                         append-icon="mdi-magnify"
@@ -30,7 +30,7 @@
                                 v-bind="attrs"
                                 v-on="on"
                             >
-                                Add Books
+                                Register Account
                             </v-btn>
                         </template>
                         <v-card>
@@ -42,66 +42,47 @@
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12">
-                                            <v-img
-                                                max-height="300"
-                                                max-width="200"
-                                                :src="
-                                                    editedItem.image == ''
-                                                        ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'
-                                                        : editedItem.image
-                                                "
-                                                contain
-                                            >
-                                            </v-img>
                                             <v-text-field
-                                                v-model="editedItem.image"
-                                                label="Image address"
+                                                v-model="editedItem.name"
+                                                label="Name"
                                             ></v-text-field>
                                         </v-col>
-                                        <v-col cols="12" sm="6" md="4">
+                                        <v-col cols="12">
                                             <v-text-field
-                                                v-model="editedItem.title"
-                                                label="Title"
+                                                v-model="editedItem.email"
+                                                label="Email"
+                                                placeholder="example@gmail.com"
+                                                :rules="emailRules"
                                             ></v-text-field>
                                         </v-col>
-                                        <v-col cols="12" sm="6" md="4">
+                                        <v-col cols="12">
                                             <v-text-field
-                                                v-model="editedItem.author"
-                                                label="Author"
+                                                v-model="editedItem.telephone"
+                                                label="Telephone"
+                                                placeholder="0123456789"
+                                                :rules="phoneNoRules"
                                             ></v-text-field>
                                         </v-col>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field
-                                                v-model="editedItem.publisher"
-                                                label="Publisher"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field
-                                                v-model="
-                                                    editedItem.categories[0]
-                                                "
-                                                label="Categories"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field
-                                                v-model="editedItem.pages"
-                                                label="Pages"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6" md="4">
+                                        <v-col cols="12">
                                             <v-select
-                                                v-model="editedItem.status"
-                                                :items="status_selection"
+                                                v-model="editedItem.role"
+                                                :items="role_selection"
                                                 :rules="[
                                                     (v) =>
                                                         !!v ||
-                                                        'Item is required',
+                                                        'Role is required',
                                                 ]"
-                                                label="Status"
+                                                label="Role"
                                                 required
                                             ></v-select>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <v-checkbox
+                                                v-model="resetPassword"
+                                                value="true"
+                                                label="Reset password"
+                                                type="checkbox"
+                                            ></v-checkbox>
                                         </v-col>
                                     </v-row>
                                 </v-container>
@@ -117,7 +98,11 @@
                                     Cancel
                                 </v-btn>
                                 <v-btn color="blue darken-1" text @click="save">
-                                    Save
+                                    {{
+                                        editedIndex === -1
+                                            ? "Register Account"
+                                            : "Edit Users"
+                                    }}
                                 </v-btn>
                             </v-card-actions>
                         </v-card>
@@ -126,7 +111,7 @@
                         <v-card>
                             <v-card-title class="text-h5"
                                 >Are you sure you want to delete this
-                                book?</v-card-title
+                                user?</v-card-title
                             >
                             <v-card-actions>
                                 <v-spacer></v-spacer>
@@ -148,31 +133,23 @@
                     </v-dialog>
                 </v-toolbar>
             </template>
-            <template v-slot:[`item.image`]="{ item }">
-                <v-img
-                    max-height="300"
-                    max-width="200"
-                    :src="item.image"
-                    contain
-                >
-                </v-img>
-            </template>
-            <template v-slot:[`item.status`]="{ item }">
+            <template v-slot:[`item.role`]="{ item }">
                 <v-chip
                     class="ma-2"
                     :color="
-                        item.status === 'AVAILABLE'
-                            ? 'green'
-                            : item.status === 'BORROWED'
+                        item.role === 'ADMIN'
                             ? 'orange'
-                            : 'red'
+                            : item.role === 'STUDENT'
+                            ? 'green'
+                            : 'blue'
                     "
                     label
                     text-color="white"
                 >
-                    {{ item.status }}
+                    {{ item.role }}
                 </v-chip>
             </template>
+
             <template v-slot:[`item.actions`]="{ item }">
                 <v-icon small class="mr-2" @click="editItem(item)">
                     mdi-pencil
@@ -196,54 +173,53 @@ export default {
         dialogDelete: false,
         headers: [
             {
-                text: "Book ID",
+                text: "User ID",
                 value: "id",
             },
             {
-                text: "Book Cover",
-                value: "image",
-                sortable: false,
+                text: "Full Name",
+                value: "name",
             },
             {
-                text: "Title",
+                text: "Email",
                 align: "start",
-                value: "title",
+                value: "email",
             },
-            { text: "Author", value: "author" },
-            { text: "Publisher", value: "publisher" },
-            { text: "Categories", value: "categories" },
-            { text: "Pages", value: "pages" },
-            { text: "Status", value: "status", sortable: false },
+            { text: "Phone Number", value: "telephone" },
+            { text: "Role", value: "role" },
             { text: "Actions", value: "actions", sortable: false },
         ],
-        books: [],
-        status_selection: ["AVAILABLE", "BORROWED", "LOST"],
+        users: [],
+        role_selection: ["STUDENT", "LECTURER", "ADMIN"],
         editedIndex: -1,
         editedItem: {
             id: "",
-            image: "",
-            title: "",
-            author: "",
-            publisher: "",
-            categories: [],
-            pages: 0,
-            status: "",
+            name: "",
+            email: "",
+            telephone: "",
+            role: "",
         },
         defaultItem: {
             id: "",
-            image: "",
-            title: "",
-            author: "",
-            publisher: "",
-            categories: [],
-            pages: 0,
-            status: "",
+            name: "",
+            email: "",
+            telephone: "",
+            role: "",
         },
+        emailRules: [
+            (v) => !!v || "E-mail is required",
+            (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+        ],
+        phoneNoRules: [
+            (v) => !!v || "Phone number is required",
+            (v) => /^(\d{10}|\d{11})$/.test(v) || "Phone number must be valid",
+        ],
+        resetPassword: "false",
     }),
 
     computed: {
         formTitle() {
-            return this.editedIndex === -1 ? "Add Books" : "Edit Books";
+            return this.editedIndex === -1 ? "Register Account" : "Edit Users";
         },
     },
 
@@ -262,17 +238,17 @@ export default {
 
     methods: {
         initialize() {
-            this.getBooks();
+            this.getUsers();
         },
 
-        async getBooks() {
-            this.books = await axios({
+        async getUsers() {
+            this.users = await axios({
                 method: "get",
-                url: "http://127.0.0.1:8000/books",
+                url: "http://127.0.0.1:8000/users",
             })
                 .then((res) => {
                     if (res.status === 200) {
-                        console.log("a list of books");
+                        console.log("a list of users");
                         console.log(res.data, 1245);
                         return res.data;
                     }
@@ -282,66 +258,48 @@ export default {
                 });
         },
 
-        async addNewBooks(book) {
+        async registerAccount(user) {
             await axios
-                .post("http://127.0.0.1:8000/book", book)
+                .post("http://127.0.0.1:8000/register", user)
                 .then((res) => {
-                    if (res.status === 201) {
+                    if (res.status === 200) {
                         Vue.$toast.open({
-                            message: "New book added.",
+                            message: "Account registered",
                             type: "success",
                             position: "top",
                         });
-                        this.getBooks();
+                        this.getUsers();
                     }
                 })
                 .catch((err) => {
                     console.log(err.response, 5566);
-                    if (err.response.data.title) {
+                    if (err.response.data.name) {
                         Vue.$toast.open({
-                            message: err.response.data.title[0],
+                            message: err.response.data.name[0],
                             type: "error",
                             position: "top",
                         });
-                    } else if (err.response.data.author) {
+                    } else if (err.response.data.role) {
                         Vue.$toast.open({
-                            message: err.response.data.author[0],
+                            message: err.response.data.role[0],
                             type: "error",
                             position: "top",
                         });
-                    } else if (err.response.data.publisher) {
+                    } else if (err.response.data.email) {
                         Vue.$toast.open({
-                            message: err.response.data.publisher[0],
+                            message: err.response.data.email[0],
                             type: "error",
                             position: "top",
                         });
-                    } else if (err.response.data.pages) {
+                    } else if (err.response.data.telephone) {
                         Vue.$toast.open({
-                            message: err.response.data.pages[0],
-                            type: "error",
-                            position: "top",
-                        });
-                    } else if (err.response.data.categories) {
-                        Vue.$toast.open({
-                            message: err.response.data.categories[0],
-                            type: "error",
-                            position: "top",
-                        });
-                    } else if (err.response.data.image) {
-                        Vue.$toast.open({
-                            message: err.response.data.image[0],
-                            type: "error",
-                            position: "top",
-                        });
-                    } else if (err.response.data.status) {
-                        Vue.$toast.open({
-                            message: err.response.data.status[0],
+                            message: err.response.data.telephone[0],
                             type: "error",
                             position: "top",
                         });
                     } else {
                         Vue.$toast.open({
-                            message: err.response.data.message,
+                            message: err.response.data.message[0],
                             type: "error",
                             position: "top",
                         });
@@ -349,67 +307,42 @@ export default {
                 });
         },
 
-        async editBook(book) {
+        async editUser(user) {
             await axios
-                .put("http://127.0.0.1:8000/book/" + book.id, book)
+                .put("http://127.0.0.1:8000/user/" + user.id, user)
                 .then((res) => {
                     if (res.status === 200) {
                         Vue.$toast.open({
-                            message: "Book is edited.",
+                            message: "User is edited.",
                             type: "success",
                             position: "top",
                         });
-                        this.getBooks();
-                    } else {
-                        console.log(book.id, 1255);
-                        Vue.$toast.open({
-                            message: "Book is not edited.",
-                            type: "error",
-                            position: "top",
-                        });
+                        this.getUsers();
                     }
                 })
                 .catch((err) => {
                     console.log(err.response, 7788);
-                    if (err.response.data.title) {
+                    if (err.response.data.name) {
                         Vue.$toast.open({
-                            message: err.response.data.title[0],
+                            message: err.response.data.name[0],
                             type: "error",
                             position: "top",
                         });
-                    } else if (err.response.data.author) {
+                    } else if (err.response.data.email) {
                         Vue.$toast.open({
-                            message: err.response.data.author[0],
+                            message: err.response.data.email[0],
                             type: "error",
                             position: "top",
                         });
-                    } else if (err.response.data.publisher) {
+                    } else if (err.response.data.telephone) {
                         Vue.$toast.open({
-                            message: err.response.data.publisher[0],
+                            message: err.response.data.telephone[0],
                             type: "error",
                             position: "top",
                         });
-                    } else if (err.response.data.pages) {
+                    } else if (err.response.data.role) {
                         Vue.$toast.open({
-                            message: err.response.data.pages[0],
-                            type: "error",
-                            position: "top",
-                        });
-                    } else if (err.response.data.categories) {
-                        Vue.$toast.open({
-                            message: err.response.data.categories[0],
-                            type: "error",
-                            position: "top",
-                        });
-                    } else if (err.response.data.image) {
-                        Vue.$toast.open({
-                            message: err.response.data.image[0],
-                            type: "error",
-                            position: "top",
-                        });
-                    } else if (err.response.data.status) {
-                        Vue.$toast.open({
-                            message: err.response.data.status[0],
+                            message: err.response.data.role[0],
                             type: "error",
                             position: "top",
                         });
@@ -421,69 +354,75 @@ export default {
                         });
                     }
                 });
-        },
 
-        async deleteBook(book) {
-            await axios
-                .delete("http://127.0.0.1:8000/book/" + book.id, book)
-                .then((res) => {
-                    if (res.status === 200) {
+            if (this.resetPassword === "true") {
+                await axios
+                    .post("http://127.0.0.1:8000/reset-password/" + user.id)
+                    .then((res) => {
+                        if (res.status === 200) {
+                            this.resetPassword = "false";
+                            Vue.$toast.open({
+                                message: "Password reset successfully",
+                                type: "success",
+                                position: "top",
+                            });
+                            this.getUsers();
+                        } else {
+                            Vue.$toast.open({
+                                message: "Password reset unsuccessfully",
+                                type: "error",
+                                position: "top",
+                            });
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err.response, 7788);
+
                         Vue.$toast.open({
-                            message: "Book is deleted.",
-                            type: "success",
-                            position: "top",
-                        });
-                        this.getBooks();
-                    } else {
-                        console.log(book.id, 1255);
-                        Vue.$toast.open({
-                            message: "Book is not deleted.",
+                            message: err.response.data.message,
                             type: "error",
                             position: "top",
                         });
+                    });
+            }
+        },
+
+        async deleteUsers(user) {
+            await axios
+                .delete("http://127.0.0.1:8000/user/" + user.id, user)
+                .then((res) => {
+                    if (res.status === 200) {
+                        Vue.$toast.open({
+                            message: "User is deleted.",
+                            type: "success",
+                            position: "top",
+                        });
+                        this.getUsers();
                     }
                 })
                 .catch((err) => {
                     console.log(err.response);
-                    if (err.response.data.title) {
+                    if (err.response.data.name) {
                         Vue.$toast.open({
-                            message: err.response.data.title[0],
+                            message: err.response.data.name[0],
                             type: "error",
                             position: "top",
                         });
-                    } else if (err.response.data.author) {
+                    } else if (err.response.data.role) {
                         Vue.$toast.open({
-                            message: err.response.data.author[0],
+                            message: err.response.data.role[0],
                             type: "error",
                             position: "top",
                         });
-                    } else if (err.response.data.publisher) {
+                    } else if (err.response.data.email) {
                         Vue.$toast.open({
-                            message: err.response.data.publisher[0],
+                            message: err.response.data.email[0],
                             type: "error",
                             position: "top",
                         });
-                    } else if (err.response.data.pages) {
+                    } else if (err.response.data.telephone) {
                         Vue.$toast.open({
-                            message: err.response.data.pages[0],
-                            type: "error",
-                            position: "top",
-                        });
-                    } else if (err.response.data.categories) {
-                        Vue.$toast.open({
-                            message: err.response.data.categories[0],
-                            type: "error",
-                            position: "top",
-                        });
-                    } else if (err.response.data.image) {
-                        Vue.$toast.open({
-                            message: err.response.data.image[0],
-                            type: "error",
-                            position: "top",
-                        });
-                    } else if (err.response.data.status) {
-                        Vue.$toast.open({
-                            message: err.response.data.status[0],
+                            message: err.response.data.telephone[0],
                             type: "error",
                             position: "top",
                         });
@@ -498,19 +437,19 @@ export default {
         },
 
         editItem(item) {
-            this.editedIndex = this.books.indexOf(item);
+            this.editedIndex = this.users.indexOf(item);
             this.editedItem = Object.assign({}, item);
             this.dialog = true;
         },
 
         deleteItem(item) {
-            this.editedIndex = this.books.indexOf(item);
+            this.editedIndex = this.users.indexOf(item);
             this.editedItem = Object.assign({}, item);
             this.dialogDelete = true;
         },
 
         deleteItemConfirm() {
-            this.deleteBook(this.editedItem);
+            this.deleteUsers(this.editedItem);
             this.closeDelete();
         },
 
@@ -532,9 +471,9 @@ export default {
 
         save() {
             if (this.editedIndex > -1) {
-                this.editBook(this.editedItem);
+                this.editUser(this.editedItem);
             } else {
-                this.addNewBooks(this.editedItem);
+                this.registerAccount(this.editedItem);
             }
             this.close();
         },

@@ -9,9 +9,7 @@
             </div>
             @endif
             @can('isAdmin')
-            <div class="btn btn-primary btn-lg">
-                You have Admin access (User Management Page)
-            </div>
+                <admin-users-table></admin-users-table>
             @endcan
         </div>
 </div>

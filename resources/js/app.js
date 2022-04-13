@@ -25,10 +25,17 @@ Vue.component(
     require("./components/ExampleComponent.vue").default
 );
 
+Vue.component("login-form", require("./components/LoginForm.vue").default);
+
 //Admin Components
 Vue.component(
     "admin-books-table",
     require("./components/admin/BooksTable.vue").default
+);
+
+Vue.component(
+    "admin-users-table",
+    require("./components/admin/UsersTable.vue").default
 );
 
 /**
