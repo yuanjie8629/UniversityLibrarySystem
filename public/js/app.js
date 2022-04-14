@@ -5836,7 +5836,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return /.+@.+\..+/.test(v) || "E-mail must be valid";
       }],
       isFormValid: false,
-      loginSnackbar: false,
       loginMessage: ""
     };
   },
@@ -5875,14 +5874,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   console.log(err.response.data, 4455);
 
                   if (err.response.data.errors.email) {
-                    _this.loginMessage = err.response.data.errors.email[0];
-                    _this.loading = false;
-                    _this.loginSnackbar = true;
+                    Vue.$toast.open({
+                      message: err.response.data.errors.email[0],
+                      type: "error",
+                      position: "top"
+                    });
                   } else if (err.response.data.password) {
-                    _this.loginMessage = err.response.data.errors.password[0];
-                    _this.loading = false;
-                    _this.loginSnackbar = true;
+                    Vue.$toast.open({
+                      message: err.response.data.errors.password[0],
+                      type: "error",
+                      position: "top"
+                    });
                   }
+
+                  _this.loading = false;
                 });
 
               case 8:

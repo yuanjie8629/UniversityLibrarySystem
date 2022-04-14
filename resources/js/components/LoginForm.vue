@@ -105,7 +105,6 @@ export default {
             (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
         ],
         isFormValid: false,
-        loginSnackbar: false,
         loginMessage: "",
     }),
 
@@ -133,15 +132,19 @@ export default {
                 .catch((err) => {
                     console.log(err.response.data, 4455);
                     if (err.response.data.errors.email) {
-                        this.loginMessage = err.response.data.errors.email[0];
-                        this.loading = false;
-                        this.loginSnackbar = true;
+                        Vue.$toast.open({
+                            message: err.response.data.errors.email[0],
+                            type: "error",
+                            position: "top",
+                        });
                     } else if (err.response.data.password) {
-                        this.loginMessage =
-                            err.response.data.errors.password[0];
-                        this.loading = false;
-                        this.loginSnackbar = true;
+                        Vue.$toast.open({
+                            message: err.response.data.errors.password[0],
+                            type: "error",
+                            position: "top",
+                        });
                     }
+                    this.loading = false;
                 });
         },
     },
