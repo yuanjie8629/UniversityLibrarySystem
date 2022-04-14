@@ -2,15 +2,31 @@
     <v-app style="background-color: transparent">
         <v-container fluid class="mx-0 px-8 d-flex">
             <!-- <p>{{ user_id }}</p> -->
-            <v-row style="width: 100%">
+
+            <v-row style="width: 100%; display: flex">
+                <v-text-field
+                    solo
+                    v-model="search"
+                    placeholder="Search Books"
+                />
+
                 <v-col
-                    v-for="(book, index) in books"
+                    v-for="(book, index) in filterBooks"
                     :key="index"
                     lg="3"
                     md="6"
                     cols="12"
                 >
                     <BookCard :data="book" />
+                </v-col>
+                <v-col v-if="filterBooks === null">
+                    No Record Found.
+                    <v-img
+                        src="http://m.prarang.in/img/norecordfound.png"
+                        alt="norecord"
+                        max-width="100"
+                        max-height="100"
+                    ></v-img>
                 </v-col>
             </v-row>
         </v-container>
@@ -28,74 +44,9 @@ export default {
     // },
     data() {
         return {
-            // books: [
-            //     {
-            //         title: "The Martian",
-            //         image: "https://lumiere-a.akamaihd.net/v1/images/image_a119dd78.jpeg",
-            //         publisher: "test",
-            //         author: "test",
-            //         category: "Novel",
-            //         status: "Lost",
-            //     },
-            //     {
-            //         title: "The Hell",
-            //         image: "https://lumiere-a.akamaihd.net/v1/images/image_a119dd78.jpeg",
-            //         publisher: "hell",
-            //         author: "hell",
-            //         category: "hell",
-            //         status: "Available",
-            //     },
-            //     {
-            //         title: "UTAR SUCK MY DICK",
-            //         image: "https://lumiere-a.akamaihd.net/v1/images/image_a119dd78.jpeg",
-            //         publisher: "hell",
-            //         author: "hell",
-            //         category: "hell",
-            //         status: "Borrowed",
-            //     },
-            //     {
-            //         title: "UTAR IS TRASH",
-            //         image: "https://lumiere-a.akamaihd.net/v1/images/image_a119dd78.jpeg",
-            //         publisher: "hell",
-            //         author: "hell",
-            //         category: "hell",
-            //         status: "Borrowed",
-            //     },
-            //     {
-            //         title: "UTAR IS TRASH",
-            //         image: "https://i.pinimg.com/originals/74/88/22/7488228009d153e94a00427f674d54bb.jpg",
-            //         publisher: "hell",
-            //         author: "hell",
-            //         category: "hell",
-            //         status: "Return",
-            //     },
-            //     {
-            //         title: "UTAR IS TRASH",
-            //         image: "https://lumiere-a.akamaihd.net/v1/images/image_a119dd78.jpeg",
-            //         publisher: "hell",
-            //         author: "hell",
-            //         category: "hell",
-            //         status: "Available",
-            //     },
-            //     {
-            //         title: "UTAR IS TRASH",
-            //         image: "https://lumiere-a.akamaihd.net/v1/images/image_a119dd78.jpeg",
-            //         publisher: "hell",
-            //         author: "hell",
-            //         category: "hell",
-            //         status: "Available",
-            //     },
-            //     {
-            //         title: "UTAR IS TRASH",
-            //         image: "https://lumiere-a.akamaihd.net/v1/images/image_a119dd78.jpeg",
-            //         publisher: "hell",
-            //         author: "hell",
-            //         category: "hell",
-            //         status: "Available",
-            //     },
-            // ],
             books: [],
             loading: "true",
+            search: "",
         };
     },
     components: {
@@ -103,6 +54,15 @@ export default {
     },
     created() {
         this.initialize();
+    },
+    computed: {
+        filterBooks: function () {
+            return this.books.filter((book) => {
+                return book.title
+                    .toLowerCase()
+                    .match(this.search.toLowerCase());
+            });
+        },
     },
     methods: {
         initialize() {

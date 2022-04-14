@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ValidatedInput;
 use App\Models\Borrow;
+use App\Models\User;
 
 class BorrowController extends Controller
 {
@@ -51,8 +52,18 @@ class BorrowController extends Controller
         }
         $validated = $validator->validated();
 
+        //check if user exists
+        $user = User::find($validated['user_id']);
+        if (is_null($user)) {
+            return response()->json(['message' => 'Invalid User ID'], 400);
+        }
+
         // check if book available
         $book = Book::find($validated['book_id']);
+        if (is_null($book)) {
+            return response()->json(['message' => 'Invalid Book ID'], 400);
+        }
+
         if ($book->status != 'AVAILABLE') {
             return response()->json(['message' => 'Book is not available'], 400);
         }
@@ -107,6 +118,9 @@ class BorrowController extends Controller
     {
         $borrow = Borrow::find($id);
         if ($borrow) {
+            if (is_null($borrow->return_date)) {
+                return response()->json(['message' => 'Book should be returned first'], 404);
+            }
             $borrow->delete();
             return response()->json(['message' => 'Borrow deleted'], 200);
         } else {

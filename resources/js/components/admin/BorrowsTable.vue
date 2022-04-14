@@ -217,7 +217,12 @@
                 </v-img>
             </template>
             <template v-slot:[`item.actions`]="{ item }">
-                <v-icon small class="mr-2" @click="editItem(item)">
+                <v-icon
+                    small
+                    class="mr-2"
+                    :disabled="item.return_date ? true : false"
+                    @click="editItem(item)"
+                >
                     mdi-keyboard-return
                 </v-icon>
                 <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
@@ -477,6 +482,7 @@ export default {
         },
 
         editItem(item) {
+            console.log(item);
             this.editedIndex = this.borrows.indexOf(item);
             this.editedItem = Object.assign({}, item);
             this.dialog = true;
