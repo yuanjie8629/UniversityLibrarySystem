@@ -37,27 +37,34 @@ Route::middleware(['auth'])->group(function () {
         Route::put('book/{id}', [App\Http\Controllers\BookController::class, 'update']);
         Route::delete('book/{id}', [App\Http\Controllers\BookController::class, 'delete']);
 
-        //borrow
-        Route::post('borrow', [App\Http\Controllers\BorrowController::class, 'create']);
+
         Route::get('borrows', [App\Http\Controllers\BorrowController::class, 'readAll']);
         Route::get('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'readOne']);
         Route::put('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'update']);
         Route::delete('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'delete']);
 
+
         Route::get('/manage-books', [App\Http\Controllers\BookManagementController::class, 'index'])->name('book-management');
         Route::get('/manage-users', [App\Http\Controllers\UserManagementController::class, 'index'])->name('user-management');
+        Route::get('/manage-borrows', [App\Http\Controllers\BorrowManagementController::class, 'index'])->name('borrow-management');
     });
+
+    
 
     // public permission
     // user model
     // change password
     Route::post('change-password/{id}', [App\Http\Controllers\Auth\ChangePasswordController::class, 'changePassword'])->name('change-password');
 
+
+
     // book model
     Route::get('books', [App\Http\Controllers\BookController::class, 'readAll']);
     Route::get('book/{id}', [App\Http\Controllers\BookController::class, 'readOne']);
 });
 
+        //borrow
+        Route::post('borrow', [App\Http\Controllers\BorrowController::class, 'create']);
 // special case for login function
 Route::middleware(['auth.login'])->group(function () {
     Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
@@ -79,7 +86,3 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/csrf', function () {
     return response()->json(csrf_token());
 });
-
-
-
-

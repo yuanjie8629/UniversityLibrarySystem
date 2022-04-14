@@ -38,6 +38,11 @@ Vue.component(
     require("./components/admin/UsersTable.vue").default
 );
 
+Vue.component(
+    "admin-borrows-table",
+    require("./components/admin/BorrowsTable.vue").default
+);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

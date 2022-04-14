@@ -107,7 +107,7 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
-                    <v-dialog v-model="dialogDelete" max-width="500px">
+                    <v-dialog v-model="dialogDelete" max-width="550px">
                         <v-card>
                             <v-card-title class="text-h5"
                                 >Are you sure you want to delete this
