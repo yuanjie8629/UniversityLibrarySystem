@@ -66,25 +66,6 @@
                     </v-form>
                 </div>
             </v-card>
-            <v-snackbar
-                :timeout="-1"
-                v-model="loginSnackbar"
-                color="red"
-                elevation="24"
-            >
-                <span class="black--text">{{ loginMessage }}</span>
-
-                <template v-slot:action="{ attrs }">
-                    <v-btn
-                        color="white"
-                        text
-                        v-bind="attrs"
-                        @click="loginSnackbar = !loginSnackbar"
-                    >
-                        Close
-                    </v-btn>
-                </template>
-            </v-snackbar>
         </v-container>
     </v-app>
 </template>
@@ -114,7 +95,6 @@ export default {
             if (!this.email || !this.password) {
                 this.loginMessage = "Please fill in all field";
                 this.loading = false;
-                this.loginSnackbar = true;
                 return;
             }
 
@@ -137,7 +117,7 @@ export default {
                             type: "error",
                             position: "top",
                         });
-                    } else if (err.response.data.password) {
+                    } else if (err.response.data.errors.password) {
                         Vue.$toast.open({
                             message: err.response.data.errors.password[0],
                             type: "error",

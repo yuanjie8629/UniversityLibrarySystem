@@ -17,7 +17,7 @@ class ChangePasswordController extends Controller
             'old_password'=>['required'],
             'password' => [
                 'required_with: password2',
-                'min:10',  // must be at least 10 characters in length
+                'min:8',  // must be at least 10 characters in length
             ], 
             'password2'=> ['required','same:password']
         ];

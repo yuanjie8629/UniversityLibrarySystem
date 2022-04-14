@@ -5799,25 +5799,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -5851,17 +5832,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.loading = true;
 
                 if (!(!_this.email || !_this.password)) {
-                  _context.next = 6;
+                  _context.next = 5;
                   break;
                 }
 
                 _this.loginMessage = "Please fill in all field";
                 _this.loading = false;
-                _this.loginSnackbar = true;
                 return _context.abrupt("return");
 
-              case 6:
-                _context.next = 8;
+              case 5:
+                _context.next = 7;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().post("http://127.0.0.1:8000/login", {
                   email: _this.email,
                   password: _this.password
@@ -5879,7 +5859,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       type: "error",
                       position: "top"
                     });
-                  } else if (err.response.data.password) {
+                  } else if (err.response.data.errors.password) {
                     Vue.$toast.open({
                       message: err.response.data.errors.password[0],
                       type: "error",
@@ -5890,7 +5870,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.loading = false;
                 });
 
-              case 8:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -32687,56 +32667,6 @@ var render = function () {
                 ],
                 1
               ),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "v-snackbar",
-            {
-              attrs: { timeout: -1, color: "red", elevation: "24" },
-              scopedSlots: _vm._u([
-                {
-                  key: "action",
-                  fn: function (ref) {
-                    var attrs = ref.attrs
-                    return [
-                      _c(
-                        "v-btn",
-                        _vm._b(
-                          {
-                            attrs: { color: "white", text: "" },
-                            on: {
-                              click: function ($event) {
-                                _vm.loginSnackbar = !_vm.loginSnackbar
-                              },
-                            },
-                          },
-                          "v-btn",
-                          attrs,
-                          false
-                        ),
-                        [
-                          _vm._v(
-                            "\n                    Close\n                "
-                          ),
-                        ]
-                      ),
-                    ]
-                  },
-                },
-              ]),
-              model: {
-                value: _vm.loginSnackbar,
-                callback: function ($$v) {
-                  _vm.loginSnackbar = $$v
-                },
-                expression: "loginSnackbar",
-              },
-            },
-            [
-              _c("span", { staticClass: "black--text" }, [
-                _vm._v(_vm._s(_vm.loginMessage)),
-              ]),
             ]
           ),
         ],

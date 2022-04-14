@@ -30,7 +30,7 @@ class LoginController extends Controller
   {
     $validator = Validator::make($request->only(['email', 'password']), $this->rules());
     if ($validator->fails()) {
-      return response()->json(['errors' => $validator->errors()]);
+      return response()->json(['errors' => $validator->errors()],422);
     }
     $validated = $validator->validated();
 
