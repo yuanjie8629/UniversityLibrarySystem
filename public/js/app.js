@@ -5436,6 +5436,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -5946,6 +5953,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   // props: {
@@ -5972,7 +5987,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return this.books.filter(function (book) {
-        console.log(book.title.toLowerCase().match(_this.search.toLowerCase()) === null, 144);
+        console.log("2");
+        console.log(book.title.toLowerCase().match(_this.search.toLowerCase()));
         return book.title.toLowerCase().match(_this.search.toLowerCase());
       });
     }
@@ -32204,7 +32220,10 @@ var render = function () {
       staticStyle: { width: "90%", "border-radius": "10px", height: "100%" },
     },
     [
-      _c("v-img", { attrs: { src: _vm.data.image, "aspect-ratio": 3 / 4 } }),
+      _c("v-img", {
+        staticStyle: { "border-bottom": "1px solid grey" },
+        attrs: { src: _vm.data.image, "aspect-ratio": 3 / 4 },
+      }),
       _vm._v(" "),
       _c(
         "v-card-title",
@@ -32217,7 +32236,7 @@ var render = function () {
           },
         },
         [
-          _c("v-card-title-text", { staticClass: "py-0 my-0 px-5" }, [
+          _c("v-card-title-text", { staticClass: "py-0 my-0 px-5 mt-2" }, [
             _vm._v("\n            " + _vm._s(_vm.data.title) + "\n        "),
           ]),
         ],
@@ -32236,7 +32255,7 @@ var render = function () {
       _c(
         "div",
         {
-          staticClass: "d-flex px-5 flex-column",
+          staticClass: "d-flex px-5 mt-2 flex-column",
           staticStyle: { width: "100%", "flex-grow": "1" },
         },
         [
@@ -32768,6 +32787,24 @@ var render = function () {
                 },
               }),
               _vm._v(" "),
+              !_vm.filterBooks.length
+                ? _c(
+                    "div",
+                    { staticClass: "d-flex" },
+                    [
+                      _c("v-img", {
+                        staticClass: "d-flex mx-auto my-auto",
+                        attrs: {
+                          src: "https://www.thefitzip.com/public/frontend/imgs/norecordfound.png",
+                          "max-width": "400",
+                          contain: "",
+                        },
+                      }),
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
               _vm._l(_vm.filterBooks, function (book, index) {
                 return _c(
                   "v-col",
@@ -32776,26 +32813,6 @@ var render = function () {
                   1
                 )
               }),
-              _vm._v(" "),
-              _vm.filterBooks === null
-                ? _c(
-                    "v-col",
-                    [
-                      _vm._v(
-                        "\n                No Record Found.\n                "
-                      ),
-                      _c("v-img", {
-                        attrs: {
-                          src: "http://m.prarang.in/img/norecordfound.png",
-                          alt: "norecord",
-                          "max-width": "100",
-                          "max-height": "100",
-                        },
-                      }),
-                    ],
-                    1
-                  )
-                : _vm._e(),
             ],
             2
           ),

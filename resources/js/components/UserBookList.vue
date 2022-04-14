@@ -9,6 +9,14 @@
                     v-model="search"
                     placeholder="Search Books"
                 />
+                <div v-if="!filterBooks.length" class="d-flex">
+                    <v-img
+                        src="https://www.thefitzip.com/public/frontend/imgs/norecordfound.png"
+                        class="d-flex mx-auto my-auto"
+                        max-width="400"
+                        contain
+                    ></v-img>
+                </div>
 
                 <v-col
                     v-for="(book, index) in filterBooks"
@@ -19,7 +27,7 @@
                 >
                     <BookCard :data="book" />
                 </v-col>
-                <v-col v-if="filterBooks === null">
+                <!-- <v-col v-if="filterBooks === null">
                     No Record Found.
                     <v-img
                         src="http://m.prarang.in/img/norecordfound.png"
@@ -27,7 +35,7 @@
                         max-width="100"
                         max-height="100"
                     ></v-img>
-                </v-col>
+                </v-col> -->
             </v-row>
         </v-container>
     </v-app>
@@ -58,6 +66,10 @@ export default {
     computed: {
         filterBooks: function () {
             return this.books.filter((book) => {
+                console.log("2");
+                console.log(
+                    book.title.toLowerCase().match(this.search.toLowerCase())
+                );
                 return book.title
                     .toLowerCase()
                     .match(this.search.toLowerCase());
