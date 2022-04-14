@@ -3,12 +3,16 @@
         class="d-flex flex-column pb-5"
         style="width: 90%; border-radius: 10px; height: 100%"
     >
-        <v-img :src="data.image" :aspect-ratio="3 / 4"></v-img>
+        <v-img
+            :src="data.image"
+            :aspect-ratio="3 / 4"
+            style="border-bottom: 1px solid grey"
+        ></v-img>
         <v-card-title
             class="py-0 px-0 my-0 d-flex"
             style="word-break: break-word; line-height: 1.4rem; flex-grow: 1"
         >
-            <v-card-title-text class="py-0 my-0 px-5">
+            <v-card-title-text class="py-0 my-0 px-5 mt-2">
                 {{ data.title }}
             </v-card-title-text> </v-card-title
         ><v-chip
@@ -30,7 +34,10 @@
                 </div>
             </div>
         </div> -->
-        <div class="d-flex px-5 flex-column" style="width: 100%; flex-grow: 1">
+        <div
+            class="d-flex px-5 mt-2 flex-column"
+            style="width: 100%; flex-grow: 1"
+        >
             <p class="my-0 py-0">Author: {{ data.author }}</p>
             <p class="my-0 py-0">Publisher: {{ data.publisher }}</p>
         </div>
