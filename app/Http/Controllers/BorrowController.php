@@ -15,7 +15,7 @@ class BorrowController extends Controller
     //retrieve all borrows
     public function readAll(Request $request)
     {
-        $borrows = Borrow::all();
+        $borrows = Borrow::select('borrows.id', "borrows.book_id", "borrows.user_id", "borrows.borrow_date", "borrows.return_date", 'books.title', "books.image", "users.name")->join("books", "books.id", '=', 'borrows.book_id')->join("users", "users.id", '=', 'borrows.user_id')->get();
         return response()->json($borrows);
     }
 
@@ -80,7 +80,7 @@ class BorrowController extends Controller
     public function update(Request $request, $id)
     {
         // validate request
-        $validator = Validator::make($request->only(['book_id', 'return_date', 'status']), $this->updateRules());
+        $validator = Validator::make($request->only(['book_id', 'return_date', "status"]), $this->updateRules());
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }

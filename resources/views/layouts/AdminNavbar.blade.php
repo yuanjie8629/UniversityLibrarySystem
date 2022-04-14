@@ -29,7 +29,7 @@
     <div id="app">
         <div class="wrapper">
             <div class="sidebar">
-                <h2>Utar Library</h2>
+                <h2>Utar Library Management System</h2>
                 <ul>
                     <li><a href="/manage-books">Manage books</a></li>
                     <li><a href="/manage-users">Manage users</a></li>

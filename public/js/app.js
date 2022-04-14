@@ -5379,6 +5379,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -5440,6 +5442,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     data: Object
@@ -5449,10 +5452,17 @@ __webpack_require__.r(__webpack_exports__);
       loading: "true"
     };
   },
-  methods: {
-    pressed: function pressed() {
-      coonsole.log("Pressed");
-    }
+  methods: {// borrowBoook(id) {
+    //     await axios.post("http://127.0.0.1:8000/borrow").then((res) => {
+    //             if (res.status === 201) {
+    //                 Vue.$toast.open({
+    //                     message: "Book Returned.",
+    //                     type: "success",
+    //                     position: "top",
+    //                 });
+    //             }
+    //         })
+    // }
   }
 });
 
@@ -5713,29 +5723,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   }
 });
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ReturnBook.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ReturnBook.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
 
@@ -6713,8 +6700,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-<<<<<<< HEAD
-=======
 //
 //
 //
@@ -6789,7 +6774,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
->>>>>>> a6d5d5521f3ce17339aa2fde47f80757513d0459
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -7144,6 +7128,9 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
 //
 //
 //
@@ -7721,13 +7708,9 @@ Vue.component("login-form", (__webpack_require__(/*! ./components/LoginForm.vue 
 
 Vue.component("admin-books-table", (__webpack_require__(/*! ./components/admin/BooksTable.vue */ "./resources/js/components/admin/BooksTable.vue")["default"]));
 Vue.component("admin-users-table", (__webpack_require__(/*! ./components/admin/UsersTable.vue */ "./resources/js/components/admin/UsersTable.vue")["default"]));
-<<<<<<< HEAD
 Vue.component("user-book-list", (__webpack_require__(/*! ./components/UserBookList.vue */ "./resources/js/components/UserBookList.vue")["default"]));
 Vue.component("change-password-form", (__webpack_require__(/*! ./components/ChangePasswordForm.vue */ "./resources/js/components/ChangePasswordForm.vue")["default"]));
-Vue.component("return-book-table", (__webpack_require__(/*! ./components/ReturnBook.vue */ "./resources/js/components/ReturnBook.vue")["default"]));
-=======
 Vue.component("admin-borrows-table", (__webpack_require__(/*! ./components/admin/BorrowsTable.vue */ "./resources/js/components/admin/BorrowsTable.vue")["default"]));
->>>>>>> a6d5d5521f3ce17339aa2fde47f80757513d0459
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -31646,45 +31629,6 @@ component.options.__file = "resources/js/components/LoginForm.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/ReturnBook.vue":
-/*!************************************************!*\
-  !*** ./resources/js/components/ReturnBook.vue ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _ReturnBook_vue_vue_type_template_id_86e28738___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReturnBook.vue?vue&type=template&id=86e28738& */ "./resources/js/components/ReturnBook.vue?vue&type=template&id=86e28738&");
-/* harmony import */ var _ReturnBook_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReturnBook.vue?vue&type=script&lang=js& */ "./resources/js/components/ReturnBook.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ReturnBook_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ReturnBook_vue_vue_type_template_id_86e28738___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ReturnBook_vue_vue_type_template_id_86e28738___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/ReturnBook.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/components/UserBookList.vue":
 /*!**************************************************!*\
   !*** ./resources/js/components/UserBookList.vue ***!
@@ -31905,22 +31849,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/ReturnBook.vue?vue&type=script&lang=js&":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/ReturnBook.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReturnBook_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ReturnBook.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ReturnBook.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReturnBook_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
 /***/ "./resources/js/components/UserBookList.vue?vue&type=script&lang=js&":
 /*!***************************************************************************!*\
   !*** ./resources/js/components/UserBookList.vue?vue&type=script&lang=js& ***!
@@ -32049,23 +31977,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginForm_vue_vue_type_template_id_12a98f72___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginForm_vue_vue_type_template_id_12a98f72___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LoginForm.vue?vue&type=template&id=12a98f72& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/LoginForm.vue?vue&type=template&id=12a98f72&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/ReturnBook.vue?vue&type=template&id=86e28738&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/ReturnBook.vue?vue&type=template&id=86e28738& ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReturnBook_vue_vue_type_template_id_86e28738___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReturnBook_vue_vue_type_template_id_86e28738___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReturnBook_vue_vue_type_template_id_86e28738___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ReturnBook.vue?vue&type=template&id=86e28738& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ReturnBook.vue?vue&type=template&id=86e28738&");
 
 
 /***/ }),
@@ -32568,42 +32479,6 @@ var render = function () {
           ),
         ],
         1
-      ),
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ReturnBook.vue?vue&type=template&id=86e28738&":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ReturnBook.vue?vue&type=template&id=86e28738& ***!
-  \**********************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function () {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-app",
-    { staticStyle: { "background-color": "transparent" } },
-    [
-      _c(
-        "v-container",
-        { staticClass: "mx-0 px-8 d-flex", attrs: { fluid: "" } },
-        [_c("p", [_vm._v("Return Book")])]
       ),
     ],
     1
@@ -34233,6 +34108,31 @@ var render = function () {
                                             ],
                                             1
                                           ),
+                                          _vm._v(" "),
+                                          _vm.editedIndex > -1
+                                            ? _c(
+                                                "v-col",
+                                                { attrs: { cols: "12" } },
+                                                [
+                                                  _c("v-checkbox", {
+                                                    attrs: {
+                                                      value: "true",
+                                                      label: "Reset password",
+                                                      type: "checkbox",
+                                                    },
+                                                    model: {
+                                                      value: _vm.resetPassword,
+                                                      callback: function ($$v) {
+                                                        _vm.resetPassword = $$v
+                                                      },
+                                                      expression:
+                                                        "resetPassword",
+                                                    },
+                                                  }),
+                                                ],
+                                                1
+                                              )
+                                            : _vm._e(),
                                         ],
                                         1
                                       ),
