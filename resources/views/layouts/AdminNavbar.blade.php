@@ -33,6 +33,7 @@
                 <ul>
                     <li><a href="/manage-books">Manage books</a></li>
                     <li><a href="/manage-users">Manage users</a></li>
+                    <li><a href="/manage-borrows">Manage borrows</a></li>
                 </ul>
             </div>
             <div class="right-view">

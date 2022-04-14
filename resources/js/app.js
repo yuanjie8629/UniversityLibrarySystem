@@ -49,8 +49,8 @@ Vue.component(
 );
 
 Vue.component(
-    "return-book-table",
-    require("./components/ReturnBook.vue").default
+    "admin-borrows-table",
+    require("./components/admin/BorrowsTable.vue").default
 );
 
 /**
