@@ -31,8 +31,7 @@
             <div class="sidebar">
                 <h2>Utar Library</h2>
                 <ul>
-                    <li><a href="/home">Home</a></li>
-                    <li><a href="/return-book">Return Books</a></li>
+                    <li><a href="/home">Home</a></li>  
                     <li><a href="/change-password">Manage Account</a></li>
                     
                 </ul>
