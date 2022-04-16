@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Routing\ResponseFactory\Route;
 
 class LoginController extends Controller
 {
@@ -30,7 +29,7 @@ class LoginController extends Controller
   {
     $validator = Validator::make($request->only(['email', 'password']), $this->rules());
     if ($validator->fails()) {
-      return response()->json(['errors' => $validator->errors()],422);
+      return response()->json(['errors' => $validator->errors()], 422);
     }
     $validated = $validator->validated();
 
@@ -57,8 +56,9 @@ class LoginController extends Controller
       }
     }
   }
-  
-  public function logout(Request $request) {
+
+  public function logout(Request $request)
+  {
     Auth::logout();
     return redirect('/');
   }

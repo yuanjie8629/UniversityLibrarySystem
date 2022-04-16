@@ -6,22 +6,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\ValidatedInput;
 use App\Models\User;
-use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
-    
+
     // rules for validation
     public function rules()
     {
-      return [
-        'name' => ['required', 'string', 'max:255'],
-        'role' => ['required', Rule::in(['ADMIN', 'STUDENT', 'LECTURER'])],
-        'email' => ['required', 'string', 'email', 'max:255'],
-        'telephone' => ['required', 'string', 'min:10', 'max:11'],
-      ];
+        return [
+            'name' => ['required', 'string', 'max:255'],
+            'role' => ['required', Rule::in(['ADMIN', 'STUDENT', 'LECTURER'])],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'telephone' => ['required', 'string', 'min:10', 'max:11'],
+        ];
     }
 
     // retrieve all users
@@ -31,30 +29,30 @@ class UserController extends Controller
         return response()->json($users);
     }
 
-     // update a user
-     public function update(Request $request, $id)
-     {
-         // validate request
-         $validator = Validator::make($request->only(['name', 'email', 'telephone', 'role']), $this->rules());
-         if ($validator->fails()) {
-             return response()->json($validator->errors(), 400);
-         }
-         $validated = $validator->validated();
- 
-         $user = User::find($id);
-         if ($user) {
-             // update book
-             $user->update($validated);
- 
-             return response()->json($user, 200);
-         } else {
-             return response()->json(['message' => 'User not found'], 404);
-         }
-     }
+    // update a user
+    public function update(Request $request, $id)
+    {
+        // validate request
+        $validator = Validator::make($request->only(['name', 'email', 'telephone', 'role']), $this->rules());
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+        $validated = $validator->validated();
 
-     // delete a user
-     public function delete($id)
-     {
+        $user = User::find($id);
+        if ($user) {
+            // update book
+            $user->update($validated);
+
+            return response()->json($user, 200);
+        } else {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+    }
+
+    // delete a user
+    public function delete($id)
+    {
         $user = User::find($id);
         if ($user) {
             $user->delete();
@@ -62,6 +60,5 @@ class UserController extends Controller
         } else {
             return response()->json(['message' => 'User not found'], 404);
         }
-     }
-
+    }
 }

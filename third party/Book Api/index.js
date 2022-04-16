@@ -1,4 +1,3 @@
-const fs = require("fs");
 const axios = require("axios");
 const book = [
     "harrypotter",
@@ -54,8 +53,6 @@ const books = [];
             }
         }
     }
-
-    //fs.writeFileSync("./books.json", JSON.stringify(books));
 
     for (let i = 0; i < books.length; i++) {
         // create book

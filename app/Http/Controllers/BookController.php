@@ -6,9 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\ValidatedInput;
 use App\Models\Book;
-use Illuminate\Support\Facades\Gate;
 
 class BookController extends Controller
 {
@@ -17,7 +15,6 @@ class BookController extends Controller
     {
         $books = Book::all();
         foreach ($books as $book) {
-            // unserilize catogies
             $book->categories = json_decode($book->categories);
         }
         return response()->json($books);
@@ -42,8 +39,8 @@ class BookController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'author' => ['required', 'string', 'max:255'],
             'publisher' => ['required', 'string', 'max:255'],
-            'pages' => ['required', 'integer', /* 'min:1' */],
-            'categories' => ['required', 'array', /* 'min:1' */],
+            'pages' => ['required', 'integer', 'min:1'],
+            'categories' => ['required', 'array', 'min:1'],
             'image' => ['required', 'string', 'url'],
             'status' => ['required', Rule::in(['AVAILABLE', 'BORROWED', 'LOST'])],
         ];
@@ -103,16 +100,12 @@ class BookController extends Controller
     // delete a book
     public function delete($id)
     {
-        if (Gate::allows("isAdmin")) {
-            $book = Book::find($id);
-            if ($book) {
-                $book->delete();
-                return response()->json(['message' => 'Book deleted'], 200);
-            } else {
-                return response()->json(['message' => 'Book not found'], 404);
-            }
+        $book = Book::find($id);
+        if ($book) {
+            $book->delete();
+            return response()->json(['message' => 'Book deleted'], 200);
         } else {
-            dd("You are not an admin.");
+            return response()->json(['message' => 'Book not found'], 404);
         }
     }
 }
