@@ -125,7 +125,7 @@
                                                 >
                                                     <v-text-field
                                                         v-model="borrow_date"
-                                                        label="Picker in menu"
+                                                        label="Borrow Date"
                                                         prepend-icon="mdi-calendar"
                                                         readonly
                                                         v-bind="attrs"
@@ -356,7 +356,11 @@ export default {
 
         async borrowBook(borrow) {
             await axios
-                .post("http://127.0.0.1:8000/borrow", borrow)
+                .post("http://127.0.0.1:8000/borrow", {
+                    user_id: borrow.user_id,
+                    book_id: borrow.book_id,
+                    borrow_date: this.borrow_date,
+                })
                 .then((res) => {
                     if (res.status === 200) {
                         Vue.$toast.open({

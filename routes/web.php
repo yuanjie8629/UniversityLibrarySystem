@@ -11,7 +11,6 @@ Route::middleware(['auth'])->group(function () {
         // user model
         // Router
         Route::get('/manage-users', [App\Http\Controllers\UserManagementController::class, 'index'])->name('user-management');
-        Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
         // REST api
         Route::get('users', [App\Http\Controllers\UserController::class, 'readAll']);
         Route::post('register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
@@ -40,21 +39,26 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Student & Lecturer permission
-    Route::middleware(['can:isStudent', 'can:isLecturer'])->group(function () {
-        // user model
-        // Router
-        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-        Route::get('/change-password', [App\Http\Controllers\auth\ChangePasswordController::class, 'index'])->name('change-password');
-        Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
-        // REST api
-        Route::post('change-password/{id}', [App\Http\Controllers\Auth\ChangePasswordController::class, 'changePassword'])->name('change-password');
-    });
+    // Route::middleware()->group(function () {
+    //     // user model
+    //     // Router
+
+    // });
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/change-password', [App\Http\Controllers\auth\ChangePasswordController::class, 'index'])->name('change-password');
+    // REST api
+    Route::post('change-password/{id}', [App\Http\Controllers\Auth\ChangePasswordController::class, 'changePassword'])->name('change-password');
 
     // public permission
     // book model
     // REST api
     Route::get('books', [App\Http\Controllers\BookController::class, 'readAll']);
     Route::get('book/{id}', [App\Http\Controllers\BookController::class, 'readOne']);
+
+    // user model
+    // Router
+    Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 });
 
 // special case for login function
