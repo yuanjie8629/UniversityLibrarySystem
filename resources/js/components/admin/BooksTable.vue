@@ -339,6 +339,12 @@ export default {
                             type: "error",
                             position: "top",
                         });
+                    } else if (err.response.data["categories.0"]) {
+                        Vue.$toast.open({
+                            message: "At least ONE category field is required",
+                            type: "error",
+                            position: "top",
+                        });
                     } else {
                         Vue.$toast.open({
                             message: err.response.data.message,
@@ -346,6 +352,7 @@ export default {
                             position: "top",
                         });
                     }
+                    this.getBooks();
                 });
         },
 
@@ -413,6 +420,12 @@ export default {
                             type: "error",
                             position: "top",
                         });
+                    } else if (err.response.data["categories.0"]) {
+                        Vue.$toast.open({
+                            message: "At least ONE category field is required",
+                            type: "error",
+                            position: "top",
+                        });
                     } else {
                         Vue.$toast.open({
                             message: err.response.data.message,
@@ -420,6 +433,7 @@ export default {
                             position: "top",
                         });
                     }
+                    this.getBooks();
                 });
         },
 

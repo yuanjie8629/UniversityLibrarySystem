@@ -59,7 +59,7 @@
                                                 >
                                                     <v-text-field
                                                         v-model="return_date"
-                                                        label="Picker in menu"
+                                                        label="Return Date"
                                                         prepend-icon="mdi-calendar"
                                                         readonly
                                                         v-bind="attrs"
