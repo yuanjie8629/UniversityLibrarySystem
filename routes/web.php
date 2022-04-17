@@ -38,17 +38,14 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('borrow/{id}', [App\Http\Controllers\BorrowController::class, 'delete']);
     });
 
-    // Student & Lecturer permission
-    // Route::middleware()->group(function () {
-    //     // user model
-    //     // Router
-
-    // });
-
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/change-password', [App\Http\Controllers\auth\ChangePasswordController::class, 'index'])->name('change-password');
-    // REST api
-    Route::post('change-password/{id}', [App\Http\Controllers\Auth\ChangePasswordController::class, 'changePassword'])->name('change-password');
+    Route::middleware(['can:isNotAdmin'])->group(function () {
+        // user model
+        // Router
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::get('/change-password', [App\Http\Controllers\auth\ChangePasswordController::class, 'index'])->name('change-password');
+        // REST api
+        Route::post('change-password/{id}', [App\Http\Controllers\Auth\ChangePasswordController::class, 'changePassword'])->name('change-password');
+    });
 
     // public permission
     // book model

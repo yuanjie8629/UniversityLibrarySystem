@@ -41,6 +41,7 @@ class BookController extends Controller
             'publisher' => ['required', 'string', 'max:255'],
             'pages' => ['required', 'integer', 'min:1'],
             'categories' => ['required', 'array', 'min:1'],
+            'categories.*' => ['required', 'string', 'distinct', 'max:255',],
             'image' => ['required', 'string', 'url'],
             'status' => ['required', Rule::in(['AVAILABLE', 'BORROWED', 'LOST'])],
         ];
