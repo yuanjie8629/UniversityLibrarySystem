@@ -35,7 +35,7 @@ This is a library system designed for internal use by the university. There are 
 
 ### ERD
 
-<img src="previews/ERD.png"><br>
+<img src="previews/ERD.jpg"><br>
 
 ## Installation
 
@@ -141,13 +141,13 @@ If you imported the university_library.sql, the login credentials are as follows
 
 ## Preview
 
-1. Login <br> <img src="previews/Login.png"><br><br>
-2. Home Page (Student and Lecturer) <br> <img src="previews/HomePage.png"><br><br>
-3. Change Password <br> <img src="previews/ChangePassword.png"><br><br>
-4. Book Management <br> <img src="previews/BookManagement.png"><br><br>
-5. Add Book <br> <img src="previews/AddBook.png"><br><br>
-6. User Management <br> <img src="previews/UserManagement.png"><br><br>
-7. Register Account <br> <img src="previews/RegisterAccount.png"><br><br>
-8. Borrow Management <br> <img src="previews/BorrowManagement.png"><br><br>
-9. Borrow Book <br> <img src="previews/BorrowBook.png"><br><br>
-10. Return Book <br> <img src="previews/ReturnBook.png"><br><br>
+1. Login <br> <img src="previews/Login.jpg"><br><br>
+2. Home Page (Student and Lecturer) <br> <img src="previews/HomePage.jpg"><br><br>
+3. Change Password <br> <img src="previews/ChangePassword.jpg"><br><br>
+4. Book Management <br> <img src="previews/BookManagement.jpg"><br><br>
+5. Add Book <br> <img src="previews/AddBook.jpg"><br><br>
+6. User Management <br> <img src="previews/UserManagement.jpg"><br><br>
+7. Register Account <br> <img src="previews/RegisterAccount.jpg"><br><br>
+8. Borrow Management <br> <img src="previews/BorrowManagement.jpg"><br><br>
+9. Borrow Book <br> <img src="previews/BorrowBook.jpg"><br><br>
+10. Return Book <br> <img src="previews/ReturnBook.jpg"><br><br>
