@@ -49,6 +49,19 @@
         "test",
         "userTesting"
       ]
+    },
+    {
+      "login": "Kai411",
+      "name": "kaii411",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51218403?v=4",
+      "profile": "https://github.com/Kai411",
+      "contributions": [
+        "code",
+        "design",
+        "doc",
+        "ideas",
+        "userTesting"
+      ]
     }
   ],
   "contributorsPerLine": 7
