@@ -1,0 +1,27 @@
+{
+  "projectName": "University-Library-Management-System",
+  "projectOwner": "IQ9999999",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "IQ9999999",
+      "name": "IQ9999999",
+      "avatar_url": "https://avatars.githubusercontent.com/u/52337440?v=4",
+      "profile": "https://github.com/IQ9999999",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas",
+        "infra"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
