@@ -35,6 +35,20 @@
         "ideas",
         "review"
       ]
+    },
+    {
+      "login": "yuanjie8629",
+      "name": "Tan Yuan Jie",
+      "avatar_url": "https://avatars.githubusercontent.com/u/86699785?v=4",
+      "profile": "https://github.com/yuanjie8629",
+      "contributions": [
+        "bug",
+        "code",
+        "doc",
+        "ideas",
+        "test",
+        "userTesting"
+      ]
     }
   ],
   "contributorsPerLine": 7
