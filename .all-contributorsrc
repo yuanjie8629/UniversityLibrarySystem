@@ -62,6 +62,18 @@
         "ideas",
         "userTesting"
       ]
+    },
+    {
+      "login": "kacoccc",
+      "name": "kacoccc",
+      "avatar_url": "https://avatars.githubusercontent.com/u/65219841?v=4",
+      "profile": "https://github.com/kacoccc",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas",
+        "userTesting"
+      ]
     }
   ],
   "contributorsPerLine": 7
