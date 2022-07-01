@@ -21,6 +21,20 @@
         "ideas",
         "infra"
       ]
+    },
+    {
+      "login": "lwleo02",
+      "name": "lwleo02",
+      "avatar_url": "https://avatars.githubusercontent.com/u/86616877?v=4",
+      "profile": "https://github.com/lwleo02",
+      "contributions": [
+        "question",
+        "code",
+        "data",
+        "doc",
+        "ideas",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7

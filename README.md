@@ -1,6 +1,6 @@
 # University Library Management System
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Overview
@@ -164,6 +164,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/IQ9999999"><img src="https://avatars.githubusercontent.com/u/52337440?v=4?s=100" width="100px;" alt=""/><br /><sub><b>IQ9999999</b></sub></a><br /><a href="https://github.com/IQ9999999/University-Library-Management-System/commits?author=IQ9999999" title="Code">💻</a> <a href="https://github.com/IQ9999999/University-Library-Management-System/commits?author=IQ9999999" title="Documentation">📖</a> <a href="#ideas-IQ9999999" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-IQ9999999" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://github.com/lwleo02"><img src="https://avatars.githubusercontent.com/u/86616877?v=4?s=100" width="100px;" alt=""/><br /><sub><b>lwleo02</b></sub></a><br /><a href="#question-lwleo02" title="Answering Questions">💬</a> <a href="https://github.com/IQ9999999/University-Library-Management-System/commits?author=lwleo02" title="Code">💻</a> <a href="#data-lwleo02" title="Data">🔣</a> <a href="https://github.com/IQ9999999/University-Library-Management-System/commits?author=lwleo02" title="Documentation">📖</a> <a href="#ideas-lwleo02" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/IQ9999999/University-Library-Management-System/pulls?q=is%3Apr+reviewed-by%3Alwleo02" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 
