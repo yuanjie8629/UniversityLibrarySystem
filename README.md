@@ -23,6 +23,14 @@ This is a library system designed for internal use by the university. There are 
 4. Borrow Management<br>
    The admin can view a list of books borrowed by the users. Besides, the admin can also search for the books borrowed by title. In addition, the admin can perform book borrowing and returning. If any of the users want to borrow the books, they would require to approach admin so that admin can create book borrowing record.
 
+### Student and Lecturer
+
+5. Browse Books<br>
+   The users can view the list of books with their details, and also search the books by title. Nonetheless, they would require to approach admin to borrow or return their books.
+
+6. Change Password<br>
+   The default password for the users are their telephone number. They can change the password by entering valid old and new passwords.
+
 ## Tech Stack
 
 -   [Laravel (PHP)](https://laravel.com/)
